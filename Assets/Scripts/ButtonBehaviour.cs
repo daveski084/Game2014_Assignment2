@@ -78,16 +78,54 @@ public class ButtonBehaviour : MonoBehaviour
         StartCoroutine(WaitForSceneLoadHowToPlayBack());
     }
 
+    //Back to Title
     private IEnumerator WaitForSceneLoadBackToTitle()
     {
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("TitleScene");
     }
 
-    //Back to Title
     public void OnButtonClickedBackToTitle()
     {
         StartCoroutine(WaitForSceneLoadBackToTitle());
+    }
+
+    //gameover
+
+    private IEnumerator WaitForSceneLoadGameover()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void OnButtonClickedBacktoMain()
+    {
+        StartCoroutine(WaitForSceneLoadGameover());
+    }
+
+    private IEnumerator WaitForSceneLoadPlayAgain()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("GameLevelScene");
+    }
+
+    public void OnButtonClickedPlayAgain()
+    {
+        StartCoroutine(WaitForSceneLoadPlayAgain());
+    }
+
+
+    //Temp button
+
+    private IEnumerator WaitForSceneLoadTEMP()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("GameoverScene");
+    }
+
+    public void OnButtonClickedTEMP()
+    {
+        StartCoroutine(WaitForSceneLoadTEMP());
     }
 
 }
