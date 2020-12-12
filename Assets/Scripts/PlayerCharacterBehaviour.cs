@@ -30,6 +30,9 @@ public class PlayerCharacterBehaviour : MonoBehaviour
     public float joystickVerticalSensitivity;
     public float horizontalForce;
     public float verticalForce;
+    public int maxHealth = 100;
+    public int currHealth;
+    public HealthbarBehaviour healthBar;
 
     private Rigidbody2D m_rigidBody2D;
     private SpriteRenderer m_spriteRenderer;
@@ -41,6 +44,8 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         m_rigidBody2D = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_animator = GetComponent<Animator>();
+        currHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -69,5 +74,11 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         {
             m_animator.SetInteger("Animation State", (int)PlayerAnimationState.IDLE);
         }
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        currHealth -= dmg;
+        healthBar.SetHealthBar(currHealth);
     }
 }
