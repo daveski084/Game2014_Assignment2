@@ -33,10 +33,12 @@ public class PlayerCharacterBehaviour : MonoBehaviour
     public int maxHealth = 100;
     public int currHealth;
     public HealthbarBehaviour healthBar;
+    public bool isJumping = false;
+
 
     private Rigidbody2D m_rigidBody2D;
     private SpriteRenderer m_spriteRenderer;
-    private Animator m_animator;
+    public Animator m_animator;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
 
     private void Move()
     {
+
         if (joystick.Horizontal > joystickHorizontalSensitivity)
         {
             // Move right.
@@ -70,11 +73,22 @@ public class PlayerCharacterBehaviour : MonoBehaviour
             m_animator.SetInteger("Animation State", (int)PlayerAnimationState.RUN);
             m_spriteRenderer.flipX = true;
         }
-        else
+        else 
         {
+            if (!isJumping)
             m_animator.SetInteger("Animation State", (int)PlayerAnimationState.IDLE);
         }
     }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Platform"))
+        {
+            m_animator.SetInteger("Animation State", (int)PlayerAnimationState.IDLE);
+            isJumping = false;
+        }
+    }
+
 
     public void TakeDamage(int dmg)
     {

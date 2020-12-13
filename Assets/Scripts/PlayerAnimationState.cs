@@ -9,7 +9,7 @@
 *
 * Description        : Enum for animation states.
 *
-* Last modified      : 20/11/20
+* Last modified      : 20/12/12
 *
 * Revision History   :
 *
@@ -27,5 +27,6 @@ using UnityEngine;
 public enum PlayerAnimationState 
 {
   IDLE,
-  RUN
+  RUN,
+  JUMP
 }
