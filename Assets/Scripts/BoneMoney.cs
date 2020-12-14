@@ -5,7 +5,7 @@
 * 
 * Student Number     : 101187910
 *
-* Date created       : 20/12/10
+* Date created       : 20/13/10
 *
 * Description        : Controls exit gate logic.
 *
@@ -20,17 +20,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-/** Handles Exit logic. */
-public class Exit : MonoBehaviour
+
+/** Bone money and sound effects. */
+public class BoneMoney : MonoBehaviour
 {
-   
+    public AudioSource collectSound;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    // Start is called before the first frame update
+    void Start()
     {
-        if (collision.gameObject.CompareTag("Player"))
-            SceneManager.LoadScene("GameWin");
+        
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collectSound.Play();
+            ScoreBehaviour.scoreNumber += 100;
+            Destroy(gameObject);
+        }
+    }
 }

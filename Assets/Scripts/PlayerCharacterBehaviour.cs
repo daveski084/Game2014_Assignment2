@@ -83,7 +83,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         }
     }
 
-    public void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("EnemyTurnPoint"))
         {
@@ -105,15 +105,21 @@ public class PlayerCharacterBehaviour : MonoBehaviour
 
 
     /** Allows the player to stay on the platform . */
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.name.Equals("Moving Platform"))
         {
             this.transform.parent = collision.transform;
         }
+       
         if (collision.gameObject.name.Equals("FerrisPlatform"))
         {
             this.transform.parent = collision.transform;
+        }
+
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(15);
         }
         // Death plane
         if (collision.gameObject.CompareTag("DeathPlane"))
@@ -123,7 +129,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         }
     }
 
-    public void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.name.Equals("Moving Platform"))
         {

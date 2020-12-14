@@ -29,16 +29,17 @@ public class ScoreBehaviour : MonoBehaviour
 {
 
     public static int scoreNumber = 0;
-    Text score;
+    Text scoreText;
 
     void Start()
     {
-        score = GetComponent<Text>();
+        scoreText = GetComponent<Text>();
+        scoreNumber = 0;
     }
 
     // Updates the score.
     void Update()
     {
-        score.text = "Score: " + scoreNumber;
+        scoreText.text = "Score: " + scoreNumber;
     }
 }
