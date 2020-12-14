@@ -120,10 +120,10 @@ public class ButtonBehaviour : MonoBehaviour
     private IEnumerator WaitForSceneLoadTEMP()
     {
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("GameoverScene");
+        SceneManager.LoadScene("MenuScene");
     }
 
-    public void OnButtonClickedTEMP()
+    public void OnButtonClickedWin()
     {
         StartCoroutine(WaitForSceneLoadTEMP());
     }

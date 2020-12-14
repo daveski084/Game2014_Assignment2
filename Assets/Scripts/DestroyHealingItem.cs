@@ -9,7 +9,7 @@
 *
 * Description        : Controls exit gate logic.
 *
-* Last modified      : 20/12/12
+* Last modified      : 20/13/12
 *
 * Revision History   :
 *
@@ -21,6 +21,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/** Destroy item */
 public class DestroyHealingItem : MonoBehaviour
 {
     public void OnCollisionEnter2D(Collision2D collision)

@@ -7,9 +7,9 @@
 *
 * Date created       : 20/11/20
 *
-* Description        : Enum for animation states.
+* Description        : Player.
 *
-* Last modified      : 20/11/20
+* Last modified      : 20/13/20
 *
 * Revision History   :
 *
@@ -111,6 +111,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
     {
         currHealth += dmg;
         healthBar.SetHealthBar(currHealth);
+        ScoreBehaviour.scoreNumber += 25;
     }
 
     /** Allows the player to stay on the platform . */
@@ -130,6 +131,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         {
             TakeDamage(15);
             ouchSFX.Play();
+            ScoreBehaviour.scoreNumber -= 50;
         }
         // Death plane
         if (collision.gameObject.CompareTag("DeathPlane"))
