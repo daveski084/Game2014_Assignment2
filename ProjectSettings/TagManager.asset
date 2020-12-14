@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - MovingPlatform
   - DeathPlane
+  - Heal
   layers:
   - Default
   - TransparentFX

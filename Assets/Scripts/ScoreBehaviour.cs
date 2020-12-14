@@ -34,7 +34,6 @@ public class ScoreBehaviour : MonoBehaviour
     void Start()
     {
         scoreText = GetComponent<Text>();
-        scoreNumber = 0;
     }
 
     // Updates the score.

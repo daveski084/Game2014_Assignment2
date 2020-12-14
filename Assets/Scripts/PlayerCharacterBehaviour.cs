@@ -37,6 +37,9 @@ public class PlayerCharacterBehaviour : MonoBehaviour
     public HealthbarBehaviour healthBar;
     public bool isJumping = false;
     public Transform spawnPoint;
+    public AudioSource ouchSFX;
+    public AudioSource ouchSFX2;
+    public AudioSource healSFX;
 
 
     private Rigidbody2D m_rigidBody2D;
@@ -51,6 +54,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         m_animator = GetComponent<Animator>();
         currHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        ScoreBehaviour.scoreNumber = 0;
     }
 
     // Update is called once per frame
@@ -103,6 +107,11 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         healthBar.SetHealthBar(currHealth);
     }
 
+    public void Heal(int dmg)
+    {
+        currHealth += dmg;
+        healthBar.SetHealthBar(currHealth);
+    }
 
     /** Allows the player to stay on the platform . */
     private void OnCollisionEnter2D(Collision2D collision)
@@ -120,12 +129,20 @@ public class PlayerCharacterBehaviour : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             TakeDamage(15);
+            ouchSFX.Play();
         }
         // Death plane
         if (collision.gameObject.CompareTag("DeathPlane"))
         {
-            TakeDamage(40);
+            ouchSFX2.Play();
+            TakeDamage(50);
             transform.position = spawnPoint.position;
+        }
+
+        if (collision.gameObject.CompareTag("Heal"))
+        {
+            Heal(25);
+            healSFX.Play();
         }
     }
 

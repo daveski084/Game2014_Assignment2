@@ -21,43 +21,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-/** Bone money and sound effects. */
-public class BoneMoney : MonoBehaviour
+public class DestroyHealingItem : MonoBehaviour
 {
-    public AudioSource collectSound;
-    public Vector3 groundLevel;
-    public Rigidbody2D rb;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        _toggle();
-    }
-
-
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collectSound.Play();
-            ScoreBehaviour.scoreNumber += 100;
             Destroy(gameObject);
-        }
-    }
-
-    private void _toggle()
-    {
-      
-        {
-            transform.position = new Vector3(transform.position.x,
-            groundLevel.y + Mathf.PingPong(Time.time, 1), 0.0f);
         }
     }
 }

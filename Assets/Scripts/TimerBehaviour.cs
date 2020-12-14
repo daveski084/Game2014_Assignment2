@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /** Handles timer logic. */
 public class TimerBehaviour : MonoBehaviour
@@ -40,6 +41,7 @@ public class TimerBehaviour : MonoBehaviour
         else
         {
             Debug.Log("Time has run out!");
+            SceneManager.LoadScene("GameoverScene");
             time = 0;
         }
         
