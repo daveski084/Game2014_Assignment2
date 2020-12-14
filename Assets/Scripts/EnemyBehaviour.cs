@@ -27,11 +27,9 @@ public class EnemyBehaviour : MonoBehaviour
 {
 
     public float runForce;
-    public Rigidbody2D rigidbody2D;
+    public Rigidbody2D rb;
     public Transform lookAheadPoint;
     public LayerMask collisionGroundLayer;
-
-    private bool shouldFlip;
     
 
     // Start is called before the first frame update
@@ -53,7 +51,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (groundHit.collider.CompareTag("EnemyTurnPoint"))
             {
-                shouldFlip = true;
+                //shouldFlip = true;
             }
 
         }
@@ -64,7 +62,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Move()
     {
-        rigidbody2D.AddForce(Vector2.left * runForce * Time.deltaTime * transform.localScale.x); ;
+        rb.AddForce(Vector2.left * runForce * Time.deltaTime * transform.localScale.x); ;
 
     }
 

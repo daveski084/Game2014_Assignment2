@@ -29,23 +29,15 @@ public class MovePlatformOnTouch : MonoBehaviour
     [SerializeField]
     public float speed;
     private float XDirection;
-    private Vector3 velocity;
-    private bool isMoving;
     private bool moveRight;
-   
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    /** Moves the platform back and forth. */
     void Update()
     {
         if (transform.position.x < 131f)
             moveRight = true;
-        if (transform.position.x > 160f)
+        if (transform.position.x > 156f)
             moveRight = false; 
 
         if(moveRight)
@@ -58,11 +50,4 @@ public class MovePlatformOnTouch : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Player"))
-        { 
-
-        }
-    }
 }

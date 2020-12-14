@@ -21,6 +21,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 /** Player Character Movement. */
 public class PlayerCharacterBehaviour : MonoBehaviour
@@ -34,6 +36,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
     public int currHealth;
     public HealthbarBehaviour healthBar;
     public bool isJumping = false;
+    public Transform spawnPoint;
 
 
     private Rigidbody2D m_rigidBody2D;
@@ -82,7 +85,7 @@ public class PlayerCharacterBehaviour : MonoBehaviour
 
     public void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Platform"))
+        if(collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("EnemyTurnPoint"))
         {
             m_animator.SetInteger("Animation State", (int)PlayerAnimationState.IDLE);
             isJumping = false;
@@ -92,7 +95,45 @@ public class PlayerCharacterBehaviour : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        if(currHealth <= 0)
+        {
+            SceneManager.LoadScene("GameoverScene");
+        }
         currHealth -= dmg;
         healthBar.SetHealthBar(currHealth);
     }
+
+
+    /** Allows the player to stay on the platform . */
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name.Equals("Moving Platform"))
+        {
+            this.transform.parent = collision.transform;
+        }
+        if (collision.gameObject.name.Equals("FerrisPlatform"))
+        {
+            this.transform.parent = collision.transform;
+        }
+        // Death plane
+        if (collision.gameObject.CompareTag("DeathPlane"))
+        {
+            TakeDamage(40);
+            transform.position = spawnPoint.position;
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name.Equals("Moving Platform"))
+        {
+            this.transform.parent = null; 
+        }
+        if (collision.gameObject.name.Equals("FerrisPlatform"))
+        {
+            this.transform.parent = null;
+        }
+
+    }
+
 }
